@@ -14,6 +14,7 @@ specifiers:
   '@visx/responsive': ^2.8.0
   '@visx/scale': ^2.2.2
   '@visx/shape': ^2.4.0
+  '@visx/text': ^2.3.0
   autoprefixer: ^10.4.1
   eslint: 8.5.0
   eslint-config-next: 12.0.7
@@ -35,6 +36,7 @@ dependencies:
   '@visx/responsive': 2.8.0_react@17.0.2
   '@visx/scale': 2.2.2
   '@visx/shape': 2.4.0_react@17.0.2
+  '@visx/text': 2.3.0_react@17.0.2
   next: 12.0.7_11ff11544d2bce3b43fc9d53812dafa4
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2

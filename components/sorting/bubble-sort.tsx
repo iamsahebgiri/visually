@@ -2,9 +2,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Group } from "@visx/group";
 import { LinearGradient } from "@visx/gradient";
+import { Text } from "@visx/text";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { useTransition, animated, to } from "@react-spring/web";
 import { getBubbleSortTrace } from "../../utils/bubble-sort";
+import generateRandomArray from "../../utils/generate-random-array";
 
 const verticalMargin = 120;
 
@@ -14,33 +16,7 @@ interface BarsProps {
   events?: boolean;
 }
 
-const originalData = [
-  {
-    id: "f30nshwck9u",
-    value: 29,
-    state: "unsorted",
-  },
-  {
-    id: "0tumlygjcpr",
-    value: 10,
-    state: "unsorted",
-  },
-  {
-    id: "shka5lat2da",
-    value: 14,
-    state: "unsorted",
-  },
-  {
-    id: "2isw8ofrxuu",
-    value: 37,
-    state: "unsorted",
-  },
-  {
-    id: "djyrlt4gx07",
-    value: 15,
-    state: "unsorted",
-  },
-];
+const originalData = generateRandomArray(10);
 
 const BubbleSort = ({ width, height, events = false }: BarsProps) => {
   // This is done to prevent weird sorting of x scale data
@@ -75,7 +51,7 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
         setData(trace[i++]);
       }
       console.log(i);
-    }, 1000);
+    }, 300);
 
     return () => clearInterval(t);
   }, []);
@@ -105,26 +81,29 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
         <LinearGradient from="#4ade80" to="#22c55e" id="sorted" />
         <rect width={width} height={height} className="fill-blue-700" rx={0} />
         <Group top={verticalMargin / 2}>
-          {transitions((style, item, t, index) => {
+          {transitions(({ ...style }, item) => {
             return (
               <animated.g
                 style={{
                   ...style,
                 }}
               >
-                <rect
-                  rx={3}
+                <animated.rect
+                  rx={6}
                   width={item.width}
                   height={item.height}
-                  fill={
-                    item.state == "unsorted"
-                      ? "white"
-                      : item.state == "sorted"
-                      ? "green"
-                      : "orange"
-                  }
+                  fill={`url(#${item.state})`}
                 />
-                <text>{item.value}</text>
+                <Text
+                  x={item.width / 2}
+                  y={item.height + 10}
+                  width={item.width}
+                  fill="white"
+                  verticalAnchor="start"
+                  textAnchor="middle"
+                >
+                  {item.value}
+                </Text>
               </animated.g>
             );
           })}
