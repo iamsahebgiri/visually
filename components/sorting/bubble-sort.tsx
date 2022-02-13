@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useMemo, useState } from "react";
 import { Group } from "@visx/group";
 import { LinearGradient } from "@visx/gradient";
@@ -16,112 +17,80 @@ interface BarsProps {
 const originalData = [
   {
     id: "f30nshwck9u",
-    value: 45,
+    value: 29,
     state: "unsorted",
   },
   {
     id: "0tumlygjcpr",
-    value: 79,
-    state: "unsorted",
-  },
-  {
-    id: "shka5lat2da",
-    value: 20,
-    state: "unsorted",
-  },
-  {
-    id: "2isw8ofrxuu",
-    value: 60,
-    state: "unsorted",
-  },
-  {
-    id: "djyrlt4gx07",
-    value: 5,
-    state: "unsorted",
-  },
-  {
-    id: "iyqvb4j8c9a",
     value: 10,
     state: "unsorted",
   },
   {
-    id: "5jwqeowt7nd",
-    value: 11,
+    id: "shka5lat2da",
+    value: 14,
     state: "unsorted",
   },
   {
-    id: "pigeejpjdlj",
-    value: 20,
+    id: "2isw8ofrxuu",
+    value: 37,
     state: "unsorted",
   },
   {
-    id: "pc8hcpjcvi",
-    value: 31,
-    state: "unsorted",
-  },
-  {
-    id: "1ktxa9m351u",
-    value: 35,
+    id: "djyrlt4gx07",
+    value: 15,
     state: "unsorted",
   },
 ];
 
 const BubbleSort = ({ width, height, events = false }: BarsProps) => {
+  // This is done to prevent weird sorting of x scale data
+  if (width < 10) return null;
+
   // bounds
   const xMax = width;
   const yMax = height - verticalMargin;
 
   const [data, setData] = useState(originalData);
 
-  const xScale = useMemo(
-    () =>
-      scaleBand<string>({
-        range: [0, xMax],
-        round: true,
-        domain: data.map((d) => d.id),
-        padding: 0.4,
-      }),
-    [xMax]
-  );
-  const yScale = useMemo(
-    () =>
-      scaleLinear<number>({
-        range: [yMax, 0],
-        round: true,
-        domain: [0, Math.max(...data.map((d) => d.value))],
-      }),
-    [yMax]
-  );
+  const xScale = scaleBand<string>({
+    range: [0, xMax],
+    round: true,
+    domain: data.map((d) => d.id),
+    padding: 0.4,
+  });
+
+  const yScale = scaleLinear<number>({
+    range: [yMax, 0],
+    round: true,
+    domain: [0, Math.max(...data.map((d) => d.value))],
+  });
 
   useEffect(() => {
     const trace = getBubbleSortTrace(originalData);
-
-    console.log(trace);
-
     let i = 0;
     const t = setInterval(() => {
-      if (i !== trace.length) {
-        setData(trace[i++]);
-      } else {
+      if (i === trace.length) {
         clearInterval(t);
+      } else {
+        setData(trace[i++]);
       }
+      console.log(i);
     }, 1000);
 
     return () => clearInterval(t);
   }, []);
 
   const transitions = useTransition(
-    data?.map((d, i) => ({
+    data.map((d) => ({
       ...d,
-      x: xScale(originalData[i].id),
+      x: xScale(d.id),
       y: yScale(d.value) ?? 0,
-      w: xScale.bandwidth(),
-      h: yMax - (yScale(d.value) ?? 0),
-      state: d.state,
+      height: yMax - (yScale(d.value) ?? 0),
+      width: xScale.bandwidth(),
     })),
     {
       key: (item: any) => item.id,
-      from: { opacity: 1 },
+      from: { opacity: 0 },
       leave: { opacity: 0 },
       enter: ({ x, y }) => ({ x, y, opacity: 1 }),
       update: ({ x, y }) => ({ x, y }),
@@ -145,8 +114,8 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
               >
                 <rect
                   rx={3}
-                  width={item.w}
-                  height={item.h}
+                  width={item.width}
+                  height={item.height}
                   fill={
                     item.state == "unsorted"
                       ? "white"
@@ -155,6 +124,7 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
                       : "orange"
                   }
                 />
+                <text>{item.value}</text>
               </animated.g>
             );
           })}

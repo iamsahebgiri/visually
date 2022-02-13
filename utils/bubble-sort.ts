@@ -7,40 +7,70 @@ interface Item {
 }
 
 let inversion = 0;
+let tracer: Item[][] = [];
 
-let trace: Item[][] = [];
+function pushItems(items: Item[]) {
+  let newItems: Item[] = [];
+  items.forEach((item) => {
+    newItems.push({ ...item });
+  });
+  tracer.push(newItems);
+}
 
-function makeTrace(arr: Item[], i: number, j: number) {
-  let newArr: Item[] = [];
-  arr.forEach((element, index) => {
-    if (index == i || index == j) {
-      newArr.push({ ...element, state: "active" });
+function markActive(items: Item[], i: number, j: number) {
+  let newItems: Item[] = [];
+  items.forEach((item, index) => {
+    if (index === i || index === j) {
+      newItems.push({ ...item, state: "active" });
     } else {
-      if (element.state == "active") {
-        newArr.push({ ...element, state: "unsorted" });
-      }
-      newArr.push(element);
+      newItems.push({ ...item });
     }
   });
-  trace.push(newArr);
+  tracer.push(newItems);
+}
+
+function markSorted(items: Item[], i: number) {
+  let newItems: Item[] = [];
+  items.forEach((item, index) => {
+    if (index === i) {
+      newItems.push({ ...item, state: "sorted" });
+    } else {
+      newItems.push({ ...item });
+    }
+  });
+  tracer.push(newItems);
 }
 
 function getBubbleSortTrace(arr: Item[]) {
-  const n = arr.length;
-  for (let i = 0; i < n; i++) {
-    for (let j = 1; j < n - i; j++) {
-      if (arr[j - 1].value > arr[j].value) {
-        const temp = arr[j];
-        arr[j] = arr[j - 1];
-        arr[j - 1] = temp;
+  let swapped;
+  let indexOfLastUnsortedElement = arr.length;
 
+  // store the initial state
+  pushItems(arr);
+
+  do {
+    swapped = false;
+    for (let i = 1; i < indexOfLastUnsortedElement; i++) {
+      // mark two consecutive elements active and add it to trace
+      markActive(arr, i - 1, i);
+
+      if (arr[i - 1].value > arr[i].value) {
+        swapped = true;
         inversion++;
-      }
 
-      makeTrace(arr, i, j);
+        let temp = arr[i];
+        arr[i] = arr[i - 1];
+        arr[i - 1] = temp;
+
+        markActive(arr, i - 1, i);
+      }
     }
-  }
-  return trace;
+    --indexOfLastUnsortedElement;
+    markSorted(arr, indexOfLastUnsortedElement);
+    arr[indexOfLastUnsortedElement].state = "sorted";
+  } while (swapped);
+
+  return tracer;
 }
 
 export { getBubbleSortTrace, inversion };
