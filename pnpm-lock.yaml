@@ -22,6 +22,7 @@ specifiers:
   postcss: ^8.4.5
   react: 17.0.2
   react-dom: 17.0.2
+  react-split-pane: ^0.1.92
   react-spring: ^9.4.2
   tailwindcss: ^3.0.8
   typescript: 4.5.4
@@ -40,6 +41,7 @@ dependencies:
   next: 12.0.7_11ff11544d2bce3b43fc9d53812dafa4
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-split-pane: 0.1.92_react-dom@17.0.2+react@17.0.2
   react-spring: 9.4.2_react-dom@17.0.2+react@17.0.2
 
 devDependencies:
@@ -3415,9 +3417,26 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
+  /react-lifecycles-compat/3.0.4:
+    resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+    dev: false
+
   /react-refresh/0.8.3:
     resolution: {integrity: sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /react-split-pane/0.1.92_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-GfXP1xSzLMcLJI5BM36Vh7GgZBpy+U/X0no+VM3fxayv+p1Jly5HpMofZJraeaMl73b3hvlr+N9zJKvLB/uz9w==}
+    peerDependencies:
+      react: ^16.0.0-0
+      react-dom: ^16.0.0-0
+    dependencies:
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-lifecycles-compat: 3.0.4
+      react-style-proptype: 3.2.2
     dev: false
 
   /react-spring/9.4.2_react-dom@17.0.2+react@17.0.2:
@@ -3439,6 +3458,12 @@ packages:
       - react-zdog
       - three
       - zdog
+    dev: false
+
+  /react-style-proptype/3.2.2:
+    resolution: {integrity: sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==}
+    dependencies:
+      prop-types: 15.8.1
     dev: false
 
   /react/17.0.2:

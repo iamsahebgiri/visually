@@ -100,6 +100,7 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
                   y={item.height + 10}
                   width={item.width}
                   fill="white"
+                  fontSize={clamp(0.9 * item.width, 8, 16)}
                   verticalAnchor="start"
                   textAnchor="middle"
                 >
