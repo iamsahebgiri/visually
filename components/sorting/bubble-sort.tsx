@@ -7,6 +7,7 @@ import { scaleBand, scaleLinear } from "@visx/scale";
 import { useTransition, animated, to } from "@react-spring/web";
 import { getBubbleSortTrace } from "../../utils/bubble-sort";
 import generateRandomArray from "../../utils/generate-random-array";
+import clamp from "../../utils/clamp";
 
 const verticalMargin = 120;
 
@@ -89,7 +90,7 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
                 }}
               >
                 <animated.rect
-                  rx={6}
+                  rx={clamp(0.15 * item.width, 1, 6)}
                   width={item.width}
                   height={item.height}
                   fill={`url(#${item.state})`}
