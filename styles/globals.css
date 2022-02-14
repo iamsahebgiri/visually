@@ -4,7 +4,32 @@ html {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-@import url("./resizer.css");
+@import "./resizer.css";
+@import "./prism.css";
 
 @tailwind components;
 @tailwind utilities;
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.task-list-item input[type="checkbox"] {
+  @apply rounded;
+}
+
+.task-list-item input[type="checkbox"]:not(:checked) {
+  @apply border-slate-300;
+}
+
+.footnotes {
+  @apply pt-8 mt-12 border-t border-gray-200 dark:border-gray-700;
+}
+
+.csl-entry {
+  @apply my-5;
+}
