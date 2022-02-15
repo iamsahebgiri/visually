@@ -1,5 +1,6 @@
 import "styles/globals.css";
 import "styles/fonts.css";
+import 'simplebar-react/dist/simplebar.min.css';
 
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";

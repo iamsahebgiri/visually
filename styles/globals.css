@@ -6,6 +6,7 @@ html {
 
 @import "./resizer.css";
 @import "./prism.css";
+@import "./simplebar.css";
 
 @tailwind components;
 @tailwind utilities;

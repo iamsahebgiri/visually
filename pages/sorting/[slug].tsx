@@ -11,6 +11,7 @@ import Select from "components/select";
 import IconButton from "components/icon-button";
 import Dropdown from "components/dropdown";
 import PlayIcon from "components/icons/play";
+import SimpleBar from "simplebar-react";
 
 const speed = [
   { label: "0.25" },
@@ -35,13 +36,13 @@ export default function SortingPage({ code, frontMatter }) {
       />
       <SplitPane split="vertical" minSize="60%" primary="second">
         <div className="absolute inset-0 w-full h-full">
-          <div className="h-full overflow-auto">
+          <SimpleBar style={{ height: "100%", overflow: "auto" }}>
             <div className="p-4">
               <article className="prose prose-slate dark:prose-dark">
                 <Component />
               </article>
             </div>
-          </div>
+          </SimpleBar>
         </div>
         <div className="relative h-screen">
           <ParentSize>
