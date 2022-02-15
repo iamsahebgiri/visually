@@ -9,7 +9,7 @@ import { getBubbleSortTrace } from "../../utils/bubble-sort";
 import generateRandomArray from "../../utils/generate-random-array";
 import clamp from "../../utils/clamp";
 
-const verticalMargin = 120;
+const verticalMargin = 184;
 
 interface BarsProps {
   width: number;
@@ -76,12 +76,20 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
 
   return width < 10 ? null : (
     <>
+      <div className="absolute z-40 top-0 p-3">
+        <div className="p-2 flex items-center">
+          <div className="px-2 text-white">
+            <span className="font-bold">Inversion</span>
+            <span className="ml-2">13</span>
+          </div>
+        </div>
+      </div>
       <svg width={width} height={height}>
         <LinearGradient from="#ffffff" to="#e2e8f0" id="unsorted" />
         <LinearGradient from="#facc15" to="#f59e0b" id="active" />
         <LinearGradient from="#4ade80" to="#22c55e" id="sorted" />
         <rect width={width} height={height} className="fill-blue-700" rx={0} />
-        <Group top={verticalMargin / 2}>
+        <Group top={verticalMargin / 3}>
           {transitions(({ ...style }, item) => {
             return (
               <animated.g
