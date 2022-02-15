@@ -4,6 +4,7 @@ interface Item {
   x?: number;
   y?: number;
   state: string;
+  inversion: number;
 }
 
 let inversion = 0;
@@ -12,7 +13,8 @@ let tracer: Item[][] = [];
 function pushItems(items: Item[]) {
   let newItems: Item[] = [];
   items.forEach((item) => {
-    newItems.push({ ...item });
+    // TODO: Remove inversion and set it to global prop
+    newItems.push({ ...item, inversion });
   });
   tracer.push(newItems);
 }
@@ -21,9 +23,11 @@ function markActive(items: Item[], i: number, j: number) {
   let newItems: Item[] = [];
   items.forEach((item, index) => {
     if (index === i || index === j) {
-      newItems.push({ ...item, state: "active" });
+      // TODO: Remove inversion and set it to global prop
+      newItems.push({ ...item, state: "active", inversion });
     } else {
-      newItems.push({ ...item });
+      // TODO: Remove inversion and set it to global prop
+      newItems.push({ ...item, inversion });
     }
   });
   tracer.push(newItems);
@@ -33,9 +37,11 @@ function markSorted(items: Item[], i: number) {
   let newItems: Item[] = [];
   items.forEach((item, index) => {
     if (index === i) {
-      newItems.push({ ...item, state: "sorted" });
+      // TODO: Remove inversion and set it to global prop
+      newItems.push({ ...item, state: "sorted", inversion });
     } else {
-      newItems.push({ ...item });
+      // TODO: Remove inversion and set it to global prop
+      newItems.push({ ...item, inversion });
     }
   });
   tracer.push(newItems);
@@ -73,4 +79,4 @@ function getBubbleSortTrace(arr: Item[]) {
   return tracer;
 }
 
-export { getBubbleSortTrace, inversion };
+export { getBubbleSortTrace };

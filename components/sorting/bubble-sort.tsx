@@ -5,9 +5,9 @@ import { LinearGradient } from "@visx/gradient";
 import { Text } from "@visx/text";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { useTransition, animated, to } from "@react-spring/web";
-import { getBubbleSortTrace } from "../../utils/bubble-sort";
-import generateRandomArray from "../../utils/generate-random-array";
-import clamp from "../../utils/clamp";
+import { getBubbleSortTrace } from "utils/bubble-sort";
+import generateRandomArray from "utils/generate-random-array";
+import clamp from "utils/clamp";
 
 const verticalMargin = 184;
 
@@ -80,7 +80,7 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
         <div className="p-2 flex items-center">
           <div className="px-2 text-white">
             <span className="font-bold">Inversion</span>
-            <span className="ml-2">13</span>
+            <span className="ml-2">{data[0].inversion}</span>
           </div>
         </div>
       </div>
