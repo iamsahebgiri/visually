@@ -15,11 +15,15 @@ interface BarsProps {
   width: number;
   height: number;
   events?: boolean;
+  speed: {
+    label: string;
+    value: number;
+  };
 }
 
 const originalData = generateRandomArray(10);
 
-const BubbleSort = ({ width, height, events = false }: BarsProps) => {
+const BubbleSort = ({ width, height, events = false, speed }: BarsProps) => {
   // This is done to prevent weird sorting of x scale data
   if (width < 10) return null;
 
@@ -51,11 +55,11 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
       } else {
         setData(trace[i++]);
       }
-      console.log(i);
-    }, 300);
+      // console.log(i);
+    }, speed.value);
 
     return () => clearInterval(t);
-  }, []);
+  }, [speed]);
 
   const transitions = useTransition(
     data.map((d) => ({
@@ -119,7 +123,6 @@ const BubbleSort = ({ width, height, events = false }: BarsProps) => {
           })}
         </Group>
       </svg>
-      <div></div>
     </>
   );
 };

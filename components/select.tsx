@@ -1,11 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import SpeedIcon from "components/icons/speed";
 import CheckIcon from "components/icons/check";
 
-export default function Select({ lists = [], index = 0 }) {
-  const [selected, setSelected] = useState(lists[index]);
-
+export default function Select({ lists = [], selected, setSelected }) {
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative">

@@ -1,28 +1,12 @@
 import React, { useMemo } from "react";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
-import { getFileBySlug, getFiles } from "lib/mdx";
-import SEO from "components/seo";
-
-import ParentSize from "@visx/responsive/lib/components/ParentSize";
-import BubbleSort from "components/sorting/bubble-sort";
 import SplitPane from "react-split-pane";
-import Select from "components/select";
-import IconButton from "components/icon-button";
-import Dropdown from "components/dropdown";
-import PlayIcon from "components/icons/play";
 import SimpleBar from "simplebar-react";
+import { getFileBySlug, getFiles } from "lib/mdx";
 
-const speed = [
-  { label: "0.25" },
-  { label: "0.5" },
-  { label: "0.75" },
-  { label: "Normal" },
-  { label: "1.25" },
-  { label: "1.5" },
-  { label: "1.75" },
-  { label: "2" },
-];
+import Playground from "components/playground";
+import SEO from "components/seo";
 
 export default function SortingPage({ code, frontMatter }) {
   // memoize to avoid re-creating the component on every render.
@@ -44,24 +28,7 @@ export default function SortingPage({ code, frontMatter }) {
             </div>
           </SimpleBar>
         </div>
-        <div className="relative h-screen">
-          <ParentSize>
-            {({ width, height }) => (
-              <BubbleSort width={width} height={height} />
-            )}
-          </ParentSize>
-
-          <div className="absolute z-40 bottom-0 h-16 w-full">
-            <div className="flex items-center justify-between px-4">
-              <Select lists={speed} index={3} />
-              <IconButton>
-                <PlayIcon className="mr-2 -ml-1 w-6 h-6 text-blue-500" />
-                Run code
-              </IconButton>
-              <Dropdown />
-            </div>
-          </div>
-        </div>
+        <Playground />
       </SplitPane>
     </>
   );
