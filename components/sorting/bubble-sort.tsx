@@ -1,37 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { Group } from "@visx/group";
 import { LinearGradient } from "@visx/gradient";
 import { Text } from "@visx/text";
 import { scaleBand, scaleLinear } from "@visx/scale";
-import { useTransition, animated, to } from "@react-spring/web";
-import { getBubbleSortTrace } from "utils/bubble-sort";
-import generateRandomArray from "utils/generate-random-array";
+import { useTransition, animated } from "@react-spring/web";
 import clamp from "utils/clamp";
 
 const verticalMargin = 184;
 
-interface BarsProps {
-  width: number;
-  height: number;
-  events?: boolean;
-  speed: {
-    label: string;
-    value: number;
-  };
-}
-
-const originalData = generateRandomArray(10);
-
-const BubbleSort = ({ width, height, events = false, speed }: BarsProps) => {
-  // This is done to prevent weird sorting of x scale data
-  if (width < 10) return null;
+const BubbleSort = ({ width, height, data }) => {
 
   // bounds
   const xMax = width;
   const yMax = height - verticalMargin;
 
-  const [data, setData] = useState(originalData);
 
   const xScale = scaleBand<string>({
     range: [0, xMax],
@@ -45,21 +28,6 @@ const BubbleSort = ({ width, height, events = false, speed }: BarsProps) => {
     round: true,
     domain: [0, Math.max(...data.map((d) => d.value))],
   });
-
-  useEffect(() => {
-    const trace = getBubbleSortTrace(originalData);
-    let i = 0;
-    const t = setInterval(() => {
-      if (i === trace.length) {
-        clearInterval(t);
-      } else {
-        setData(trace[i++]);
-      }
-      // console.log(i);
-    }, speed.value);
-
-    return () => clearInterval(t);
-  }, [speed]);
 
   const transitions = useTransition(
     data.map((d) => ({
