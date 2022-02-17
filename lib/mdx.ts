@@ -3,9 +3,11 @@ import { readFileSync, readdirSync } from "fs";
 import { bundleMDX } from "mdx-bundler";
 
 import remarkGfm from "remark-gfm";
+import remarkMath from 'remark-math'
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrismPlus from "rehype-prism-plus";
+import rehypeKatex from "rehype-katex";
 import remarkCodeTitle from "./remark-code-title";
 
 import siteConfig from "site.config";
@@ -25,12 +27,14 @@ export async function getFileBySlug(type, slug?) {
       options.remarkPlugins = [
         ...(options?.remarkPlugins ?? []),
         remarkGfm,
+        remarkMath,
         remarkCodeTitle,
       ];
       options.rehypePlugins = [
         ...(options?.rehypePlugins ?? []),
         rehypeSlug,
         rehypePrismPlus,
+        rehypeKatex,
         [
           rehypeAutolinkHeadings,
           {
