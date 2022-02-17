@@ -47,9 +47,22 @@ function markSorted(items: Item[], i: number) {
   tracer.push(newItems);
 }
 
-function getBubbleSortTrace(arr: Item[]) {
+function getBubbleSortTrace(arrToSort: Item[]) {
+  // prevent mutation of original array
+  let arr: Item[] = [];
+
+  arrToSort.forEach((item) => {
+    arr.push({ ...item });
+  });
+
   let swapped;
   let indexOfLastUnsortedElement = arr.length;
+
+  // always send fresh trace
+  if (tracer.length > 0) {
+    tracer = [];
+    inversion = 0;
+  }
 
   // store the initial state
   pushItems(arr);

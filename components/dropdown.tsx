@@ -2,7 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import AddIcon from "components/icons/add";
 
-export default function Dropdown() {
+export default function Dropdown({ handleOriginalData }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -27,6 +27,7 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-blue-200 text-blue-900" : "text-gray-900"
                   } group flex items-center w-full px-3 py-2 text-sm`}
+                  onClick={() => handleOriginalData("custom")}
                 >
                   Custom
                 </button>
@@ -38,6 +39,7 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-blue-200 text-blue-900" : "text-gray-900"
                   } group flex items-center w-full px-3 py-2 text-sm`}
+                  onClick={() => handleOriginalData("random")}
                 >
                   Random
                 </button>
@@ -49,6 +51,7 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-blue-200 text-blue-900" : "text-gray-900"
                   } group flex items-center w-full px-3 py-2 text-sm`}
+                  onClick={() => handleOriginalData("sorted")}
                 >
                   Sorted
                 </button>
@@ -60,18 +63,19 @@ export default function Dropdown() {
                   className={`${
                     active ? "bg-blue-200 text-blue-900" : "text-gray-900"
                   } group flex items-center w-full px-3 py-2 text-sm`}
+                  onClick={() => handleOriginalData("nearly-sorted")}
                 >
                   Nearly sorted
                 </button>
               )}
             </Menu.Item>
-
             <Menu.Item>
               {({ active }) => (
                 <button
                   className={`${
                     active ? "bg-blue-200 text-blue-900" : "text-gray-900"
                   } group flex items-center w-full px-3 py-2 text-sm`}
+                  onClick={() => handleOriginalData("many-duplicates")}
                 >
                   Many duplicates
                 </button>

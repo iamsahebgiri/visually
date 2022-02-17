@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useInterval } from "react-use";
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 import Dropdown from "components/dropdown";
@@ -18,16 +18,19 @@ const speeds = [
   { label: "Faster", value: 100 },
 ];
 
-const originalData = generateRandomArray(10);
-
 export default function Playground() {
   const [speed, setSpeed] = useState(speeds[2]);
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [step, setStep] = useState(0);
 
-  const trace = useMemo(() => getBubbleSortTrace(originalData), []);
-  const [data, setData] = useState(trace[0]);
+  const [initialData, setInitialData] = useState(generateRandomArray(10));
+  const [data, setData] = useState(initialData);
+  const trace = useMemo(() => getBubbleSortTrace(initialData), [initialData]);
+
+  useEffect(() => {
+    setData(initialData);
+  }, [initialData]);
 
   useInterval(
     () => {
@@ -53,6 +56,28 @@ export default function Playground() {
     [isCompleted, isRunning]
   );
 
+  const handleOriginalData = (type) => {
+    // Reset every variables and stop animation
+    setIsRunning(false);
+    setIsCompleted(false);
+    setStep(0);
+
+    switch (type) {
+      case "random":
+        setInitialData(generateRandomArray(10));
+        break;
+
+      case "sorted":
+        const randomArray = generateRandomArray(10);
+        randomArray.sort((prev, next) => prev.value - next.value);
+        setInitialData(randomArray);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="relative h-screen">
       <ParentSize>
@@ -65,7 +90,7 @@ export default function Playground() {
         <div className="flex items-center justify-between px-4">
           <Select lists={speeds} selected={speed} setSelected={setSpeed} />
           {memoizedPlaybackButton}
-          <Dropdown />
+          <Dropdown handleOriginalData={handleOriginalData} />
         </div>
       </div>
     </div>

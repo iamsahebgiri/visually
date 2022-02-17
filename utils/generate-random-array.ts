@@ -5,6 +5,8 @@ function generateRandomArray(limit: number) {
       id: Math.random().toString(36).slice(2),
       value: Math.floor(Math.random() * 98) + 1,
       state: "unsorted",
+      // TODO: Think of a better way to store inversion
+      inversion: 0,
     };
     arr.push(element);
   }
