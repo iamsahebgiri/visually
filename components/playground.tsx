@@ -56,7 +56,11 @@ export default function Playground() {
     [isCompleted, isRunning]
   );
 
-  const handleOriginalData = (type) => {
+  const handleCustomUserArray = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleOriginalData = (type, customUserArray = []) => {
     // Reset every variables and stop animation
     setIsRunning(false);
     setIsCompleted(false);
@@ -64,6 +68,11 @@ export default function Playground() {
 
     let randomArray = generateRandomArray(10);
     switch (type) {
+      case "custom":
+        console.log(customUserArray)
+        setInitialData(customUserArray);
+        break;
+
       case "random":
         setInitialData(randomArray);
         break;
@@ -95,7 +104,7 @@ export default function Playground() {
         )}
       </ParentSize>
 
-      <div className="absolute z-40 bottom-0 h-16 w-full">
+      <div className="absolute z-10 bottom-0 h-16 w-full">
         <div className="flex items-center justify-between px-4">
           <Select lists={speeds} selected={speed} setSelected={setSpeed} />
           {memoizedPlaybackButton}

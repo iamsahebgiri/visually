@@ -48,7 +48,7 @@ const BubbleSort = ({ width, height, data }) => {
 
   return width < 10 ? null : (
     <>
-      <div className="absolute z-40 top-0 p-3">
+      <div className="absolute z-10 top-0 p-3">
         <div className="p-2 flex items-center">
           <div className="px-2 text-white">
             <span className="font-bold">Inversion</span>
