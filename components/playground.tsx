@@ -62,15 +62,24 @@ export default function Playground() {
     setIsCompleted(false);
     setStep(0);
 
+    let randomArray = generateRandomArray(10);
     switch (type) {
       case "random":
-        setInitialData(generateRandomArray(10));
+        setInitialData(randomArray);
         break;
 
       case "sorted":
-        const randomArray = generateRandomArray(10);
         randomArray.sort((prev, next) => prev.value - next.value);
         setInitialData(randomArray);
+        break;
+
+      case "nearly-sorted":
+        randomArray.sort((prev, next) => prev.value - next.value);
+        setInitialData([...randomArray.slice(0, 7), ...generateRandomArray(3)]);
+        break;
+
+      case "many-duplicates":
+        setInitialData(generateRandomArray(10, 1, 5));
         break;
 
       default:
