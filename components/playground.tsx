@@ -56,10 +56,6 @@ export default function Playground() {
     [isCompleted, isRunning]
   );
 
-  const handleCustomUserArray = (e) => {
-    console.log(e.target.value);
-  };
-
   const handleOriginalData = (type, customUserArray = []) => {
     // Reset every variables and stop animation
     setIsRunning(false);
@@ -69,7 +65,7 @@ export default function Playground() {
     let randomArray = generateRandomArray(10);
     switch (type) {
       case "custom":
-        console.log(customUserArray)
+        console.log(customUserArray);
         setInitialData(customUserArray);
         break;
 
@@ -153,11 +149,5 @@ const PlaybackButton = ({
         </IconButton>
       );
     }
-    return (
-      <IconButton onClick={() => setIsRunning(true)}>
-        <PlayIcon className="mr-2 -ml-1 w-6 h-6 text-blue-500" />
-        Resume
-      </IconButton>
-    );
   }
 };
