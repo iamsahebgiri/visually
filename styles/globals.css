@@ -11,6 +11,28 @@ html {
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .gradient-canvas {
+    background-image: conic-gradient(
+      theme("colors.yellow.300"),
+      theme("colors.red.300"),
+      theme("colors.purple.300"),
+      theme("colors.blue.300"),
+      theme("colors.teal.300"),
+      theme("colors.yellow.300")
+    );
+  }
+  .logo-shadow-overlay::before {
+    content: "";
+    mix-blend-mode: overlay;
+    width: 106px;
+    height: 106px;
+    border-radius: 24px;
+    position: absolute;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.5), 0 2px 59px 0 rgba(0, 0, 0, 0.6), 0 12px 10px -7px rgba(0, 0, 0, 0.8);
+  }
+}
+
 .task-list-item::before {
   @apply hidden;
 }
