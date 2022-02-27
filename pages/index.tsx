@@ -3,11 +3,11 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div className="">
+    <div>
       <div className="absolute inset-x-0 top-0 h-[28rem] overflow-hidden -z-10">
         <div className="gradient-canvas absolute h-72 w-72 rounded-full blur-2xl top-12 left-[calc(50%-9rem)]"></div>
       </div>
-      <div className="mt-32 flex justify-center">
+      <div className="mt-32 flex flex-col justify-center items-center">
         <div className="logo-shadow-overlay bg-transparent rounded-[24px] shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,12 +86,10 @@ const Home: NextPage = () => {
             </defs>
           </svg>
         </div>
-      </div>
-      <div className="mt-28 flex justify-center">
-        <div className="flex items-center">
+        <div className="flex items-center mt-28">
           <input
             type="text"
-            className="h-12 pr-10 bg-white border-1 border-slate-200 ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-blue-500 shadow rounded-lg  placeholder-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
+            className="h-12 pr-10 bg-white border-1 border-slate-200 hover:ring-slate-300 focus:outline-none focus:ring-blue-500 shadow-sm rounded-lg  placeholder-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
             placeholder="Search algo..."
           />
           <svg
@@ -109,26 +107,20 @@ const Home: NextPage = () => {
             <circle cx="11" cy="11" r="6"></circle>
           </svg>
         </div>
-        {/* <button
-          type="button"
-          className="flex items-center w-72 text-left space-x-3 px-4 h-12 bg-white ring-1 ring-slate-900/10 hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm rounded-lg text-slate-400 dark:bg-slate-800 dark:ring-0 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700"
-        >
-          <span className="flex-auto">Search algo...</span>
-          <svg
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="flex-none text-slate-300 dark:text-slate-400"
-            aria-hidden="true"
-          >
-            <path d="m19 19-3.5-3.5"></path>
-            <circle cx="11" cy="11" r="6"></circle>
-          </svg>
-        </button> */}
+      </div>
+      <div className="my-12 mx-auto max-w-6xl grid grid-cols-1 gap-3 sm:grid-cols-4 px-3">
+        <div className="bg-white rounded-lg shadow px-6 py-5 my-auto xl:mt-18 dark:bg-slate-800">
+          Bubble sort
+        </div>
+        <div className="bg-white rounded-lg shadow px-6 py-5 my-auto xl:mt-18 dark:bg-slate-800">
+          Bubble sort
+        </div>
+        <div className="bg-white rounded-lg shadow px-6 py-5 my-auto xl:mt-18 dark:bg-slate-800">
+          Bubble sort
+        </div>
+        <div className="bg-white rounded-lg shadow px-6 py-5 my-auto xl:mt-18 dark:bg-slate-800">
+          Bubble sort
+        </div>
       </div>
     </div>
   );

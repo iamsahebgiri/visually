@@ -4,6 +4,10 @@ html {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
+body {
+  @apply bg-slate-50 text-slate-900;
+}
+
 @import "./resizer.css";
 @import "./prism.css";
 @import "./simplebar.css";
